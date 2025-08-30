@@ -58,7 +58,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
             title="Теория"
             icon={BookOpen}
             onClick={() => onNavigate('theory')}
-            disabled
           />
           
           <NavigationButton
@@ -72,7 +71,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
             title="Алгоритмы"
             icon={Cpu}
             onClick={() => onNavigate('algorithms')}
-            disabled
           />
         </div>
       </div>

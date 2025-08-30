@@ -25,7 +25,7 @@ export const PracticeScreen: React.FC<PracticeScreenProps> = ({
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
-              className="bg-gray-400 h-2 rounded-full transition-all duration-300" 
+              className="bg-blue-500 h-2 rounded-full transition-all duration-300" 
               style={{ width: `${totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0}%` }} 
             />
           </div>

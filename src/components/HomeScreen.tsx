@@ -26,7 +26,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      <Header title="Обучение программированию" />
+      <Header title="SenseAI" />
       
       <div className="p-4 space-y-6">
         {/* Прогресс */}

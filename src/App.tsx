@@ -5,6 +5,7 @@ import { PracticeScreen } from './components/PracticeScreen';
 import { AlgorithmsScreen } from './components/AlgorithmsScreen';
 import { TaskScreen } from './components/TaskScreen';
 import { FAQScreen } from './components/FAQScreen';
+import { NavigationTabs } from './components/NavigationTabs';
 import { Header } from './components/Header';
 import { Screen, Task } from './types';
 
@@ -29,26 +30,26 @@ function App() {
     }
   };
 
-  if (selectedTask) {
-    return <TaskScreen task={selectedTask} onBack={handleBack} />;
-  }
-
   const getScreenTitle = () => {
     switch (currentScreen) {
       case 'home':
-        return 'SenseAI / Все кейсы';
+        return 'SenseAI';
       case 'theory':
-        return 'Теория';
+        return 'SenseAI/Теория';
       case 'practice':
-        return 'Практика';
+        return 'SenseAI/Кейсы';
       case 'algorithms':
-        return 'Алгоритмы';
+        return 'SenseAI/Алгоритмы';
       case 'faq':
-        return 'FAQ';
+        return 'SenseAI/FAQ';
       default:
-        return 'SenseAI / Все кейсы';
+        return 'SenseAI';
     }
   };
+
+  if (selectedTask) {
+    return <TaskScreen task={selectedTask} onBack={handleBack} />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,6 +58,10 @@ function App() {
         onBack={currentScreen !== 'home' ? handleBack : undefined}
         showBack={currentScreen !== 'home'}
       />
+      
+      {currentScreen !== 'home' && (
+        <NavigationTabs currentScreen={currentScreen} onNavigate={handleNavigate} />
+      )}
       
       <div className="flex-1">
         {currentScreen === 'home' && <HomeScreen onNavigate={handleNavigate} />}

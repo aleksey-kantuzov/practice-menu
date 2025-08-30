@@ -13,7 +13,8 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
   const tabs = [
     { id: 'theory' as Screen, label: 'Теория' },
     { id: 'practice' as Screen, label: 'Практика' },
-    { id: 'algorithms' as Screen, label: 'Алгоритмы' }
+    { id: 'algorithms' as Screen, label: 'Алгоритмы' },
+    { id: 'faq' as Screen, label: 'FAQ' }
   ];
 
   return (

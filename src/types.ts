@@ -11,6 +11,7 @@ export interface PracticeBlock {
   id: number;
   title: string;
   description: string;
+  icon: string;
   tasks: Task[];
 }
 

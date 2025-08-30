@@ -5,6 +5,7 @@ export const practiceBlocks: PracticeBlock[] = [
     id: 1,
     title: "Основы программирования",
     description: "Базовые концепции и принципы разработки",
+    icon: "Code",
     tasks: [
       {
         id: 1,
@@ -36,6 +37,7 @@ export const practiceBlocks: PracticeBlock[] = [
     id: 2,
     title: "Структуры данных",
     description: "Работа с массивами, объектами и коллекциями",
+    icon: "Database",
     tasks: [
       {
         id: 4,
@@ -67,6 +69,7 @@ export const practiceBlocks: PracticeBlock[] = [
     id: 3,
     title: "Функции и области видимости",
     description: "Создание и использование функций",
+    icon: "Zap",
     tasks: [
       {
         id: 7,
@@ -98,20 +101,21 @@ export const practiceBlocks: PracticeBlock[] = [
     id: 4,
     title: "Асинхронное программирование",
     description: "Работа с промисами и асинхронным кодом",
+    icon: "Clock",
     tasks: [
       {
         id: 10,
         title: "Промисы и then/catch",
         difficulty: 'medium',
-        status: 'not_started',
-        best_score: null,
+        status: 'completed',
+        best_score: 9,
         description: "Основы асинхронной работы с промисами"
       },
       {
         id: 11,
         title: "Async/Await синтаксис",
         difficulty: 'medium',
-        status: 'not_started',
+        status: 'in_progress',
         best_score: null,
         description: "Современный подход к асинхронности"
       },

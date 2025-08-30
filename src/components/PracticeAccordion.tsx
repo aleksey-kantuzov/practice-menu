@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown, CheckCircle, Play, Lock, Code, Database, Zap, Clock } from 'lucide-react';
+import { ChevronDown, Code, Database, Zap, Clock } from 'lucide-react';
 import { PracticeBlock, Task } from '../types';
+import { practiceBlocks } from '../data/practiceData';
 
 interface PracticeAccordionProps {
   block: PracticeBlock;
@@ -66,6 +67,22 @@ const getStatusText = (status: Task['status']) => {
   }
 };
 
+// Функция для определения доступности задачи
+const isTaskUnlocked = (taskId: number): boolean => {
+  // Получаем все задачи в порядке их следования
+  const allTasks = practiceBlocks.flatMap(block => block.tasks);
+  const currentTaskIndex = allTasks.findIndex(task => task.id === taskId);
+  
+  if (currentTaskIndex === 0) {
+    // Первая задача всегда доступна
+    return true;
+  }
+  
+  // Проверяем, завершена ли предыдущая задача
+  const previousTask = allTasks[currentTaskIndex - 1];
+  return previousTask.status === 'completed';
+};
+
 export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
   block,
   onTaskClick
@@ -102,44 +119,61 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
         } overflow-hidden`}
       >
         <div className="px-4 pb-4 space-y-3">
-          {block.tasks.map((task) => (
-            <button
-              key={task.id}
-              onClick={() => task.status !== 'not_started' && onTaskClick(task)}
-              disabled={task.status === 'not_started'}
-              className={`w-full p-4 rounded-xl border text-left transition-all duration-200 ${
-                task.status === 'not_started'
-                  ? 'border-gray-200 bg-gray-50 opacity-60 cursor-not-allowed'
-                  : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 hover:shadow-md'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <h4 className="font-medium text-gray-900 mb-3">{task.title}</h4>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        getDifficultyColor(task.difficulty)
-                      }`}>
-                        {getDifficultyText(task.difficulty)}
-                      </span>
-                      
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        getStatusColor(task.status)
-                      }`}>
-                        {getStatusText(task.status)}
-                      </span>
-                    </div>
+          {block.tasks.map((task) => {
+            const isUnlocked = isTaskUnlocked(task.id);
+            const isClickable = isUnlocked && task.status !== 'not_started';
+            
+            return (
+              <button
+                key={task.id}
+                onClick={() => isClickable && onTaskClick(task)}
+                disabled={!isUnlocked}
+                className={`w-full p-4 rounded-xl border text-left transition-all duration-200 ${
+                  !isUnlocked
+                    ? 'border-gray-200 bg-gray-100 opacity-60 cursor-not-allowed'
+                    : isClickable
+                    ? 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 hover:shadow-md'
+                    : 'border-gray-200 bg-gray-50'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <h4 className={`font-medium mb-3 ${
+                      !isUnlocked ? 'text-gray-400' : 'text-gray-900'
+                    }`}>
+                      {task.title}
+                    </h4>
                     
-                    <div className="text-sm font-medium text-gray-900">
-                      {task.best_score !== null ? `${task.best_score}/10` : '—/10'}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                          !isUnlocked 
+                            ? 'text-gray-400 bg-gray-200'
+                            : getDifficultyColor(task.difficulty)
+                        }`}>
+                          {getDifficultyText(task.difficulty)}
+                        </span>
+                        
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                          !isUnlocked 
+                            ? 'text-gray-400 bg-gray-200'
+                            : getStatusColor(task.status)
+                        }`}>
+                          {!isUnlocked ? 'Заблокирован' : getStatusText(task.status)}
+                        </span>
+                      </div>
+                      
+                      <div className={`text-sm font-medium ${
+                        !isUnlocked ? 'text-gray-400' : 'text-gray-900'
+                      }`}>
+                        {task.best_score !== null ? `${task.best_score}/10` : '—/10'}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

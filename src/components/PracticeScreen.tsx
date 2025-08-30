@@ -28,19 +28,21 @@ export const PracticeScreen: React.FC<PracticeScreenProps> = ({
     <div className="min-h-screen bg-gray-50">
       <div className="p-4">
         <div className="mb-6 p-4 bg-white rounded-xl border border-gray-200">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center space-x-4">
-              <div className="text-center">
-                <div className="text-lg font-bold text-gray-900">{averageScore}</div>
-                <div className="text-xs text-gray-500">Средняя оценка</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg font-bold text-gray-900">{completedTasks}</div>
-                <div className="text-xs text-gray-500">Решено кейсов</div>
-              </div>
-            </div>
-            <span className="text-sm font-medium text-gray-600">{completedTasks}/{totalTasks}</span>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-base font-medium text-gray-900">Прогресс</h3>
           </div>
+          
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900">{averageScore}</div>
+              <div className="text-xs text-gray-500">Средняя оценка</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900">{completedTasks}/{totalTasks}</div>
+              <div className="text-xs text-gray-500">Успешно решено</div>
+            </div>
+          </div>
+          
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
               className="bg-blue-500 h-2 rounded-full transition-all duration-300" 

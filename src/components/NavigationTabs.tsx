@@ -19,7 +19,7 @@ export const NavigationTabs: React.FC<NavigationTabsProps> = ({
 
   return (
     <div className="bg-white border-b border-gray-200 px-4 py-3">
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 justify-center">
         {tabs.map((tab) => (
           <button
             key={tab.id}

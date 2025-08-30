@@ -31,8 +31,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigate }) => {
       <div className="p-4 space-y-6">
         {/* Прогресс */}
         <div className="p-4 bg-white rounded-xl border border-gray-200">
-          <h3 className="text-base font-medium text-gray-900 mb-4">Прогресс</h3>
-          
           <div className="grid grid-cols-3 gap-4 mb-4">
             <div className="text-center">
               <div className="text-lg font-bold text-gray-900">0</div>

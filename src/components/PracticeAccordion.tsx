@@ -159,7 +159,7 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
                             ? 'text-gray-400 bg-gray-200'
                             : getStatusColor(task.status)
                         }`}>
-                          {!isUnlocked ? 'Заблокирован' : getStatusText(task.status)}
+                          {!isUnlocked ? 'Не начат' : getStatusText(task.status)}
                         </span>
                       </div>
                       

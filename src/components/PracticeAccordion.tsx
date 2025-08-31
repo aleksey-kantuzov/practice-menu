@@ -172,10 +172,13 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
                         </span>
                       </div>
                       
-                      <div className={`text-sm font-medium ${
+                      <div className={`text-center ${
                         !isUnlocked ? 'text-gray-400' : 'text-gray-900'
                       }`}>
-                        {task.best_score !== null ? `${task.best_score}/10 оценка` : '—/10 оценка'}
+                        <div className="text-sm font-bold">
+                          {task.best_score !== null ? `${task.best_score}/10` : '—/10'}
+                        </div>
+                        <div className="text-xs text-gray-500">Оценка</div>
                       </div>
                     </div>
                   </div>

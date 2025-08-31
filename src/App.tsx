@@ -31,20 +31,7 @@ function App() {
   };
 
   const getScreenTitle = () => {
-    switch (currentScreen) {
-      case 'home':
-        return 'SenseAI';
-      case 'theory':
-        return 'SenseAI/Теория';
-      case 'practice':
-        return 'SenseAI/Кейсы';
-      case 'algorithms':
-        return 'SenseAI/Алгоритмы';
-      case 'faq':
-        return 'SenseAI/FAQ';
-      default:
-        return 'SenseAI';
-    }
+    return 'SenseAI';
   };
 
   if (selectedTask) {

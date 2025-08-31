@@ -172,7 +172,7 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
                         </span>
                       </div>
                       
-                      <div className={`text-center ${
+                      <div className={`text-center flex flex-col items-center justify-center ${
                         !isUnlocked ? 'text-gray-400' : 'text-gray-900'
                       }`}>
                         <div className="text-sm font-bold">

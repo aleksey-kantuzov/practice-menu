@@ -90,6 +90,10 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const IconComponent = getIcon(block.icon);
 
+  // Подсчитываем завершенные задачи
+  const completedTasks = block.tasks.filter(task => task.status === 'completed').length;
+  const totalTasks = block.tasks.length;
+
   return (
     <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
       <button
@@ -105,11 +109,16 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
               <h3 className="font-medium text-gray-900">{block.title}</h3>
             </div>
           </div>
-          <ChevronDown
-            className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
-              isOpen ? 'transform rotate-180' : ''
-            }`}
-          />
+          <div className="flex items-center space-x-3">
+            <span className="text-sm font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-full">
+              {completedTasks}/{totalTasks}
+            </span>
+            <ChevronDown
+              className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
+                isOpen ? 'transform rotate-180' : ''
+              }`}
+            />
+          </div>
         </div>
       </button>
 

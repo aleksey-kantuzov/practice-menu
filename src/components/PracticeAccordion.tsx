@@ -164,7 +164,7 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
                         </span>
                         
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          !isUnlocked 
+                  <div className={`flex flex-col items-center justify-center ${
                             ? 'text-gray-400 bg-gray-200'
                             : getStatusColor(task.status)
                         }`}>

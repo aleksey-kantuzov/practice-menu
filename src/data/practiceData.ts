@@ -12,15 +12,15 @@ export const practiceBlocks: PracticeBlock[] = [
         title: "Переменные и типы данных",
         difficulty: 'easy',
         status: 'completed',
-        best_score: 8,
+        best_score: 7,
         description: "Изучите основы работы с переменными и различными типами данных"
       },
       {
         id: 2,
         title: "Условные операторы",
         difficulty: 'easy',
-        status: 'in_progress',
-        best_score: null,
+        status: 'completed',
+        best_score: 5,
         description: "Практикуйте использование if-else конструкций"
       },
       {
@@ -108,15 +108,15 @@ export const practiceBlocks: PracticeBlock[] = [
         title: "Промисы и then/catch",
         difficulty: 'medium',
         status: 'completed',
-        best_score: 9,
+        best_score: 7,
         description: "Основы асинхронной работы с промисами"
       },
       {
         id: 11,
         title: "Async/Await синтаксис",
         difficulty: 'medium',
-        status: 'in_progress',
-        best_score: null,
+        status: 'completed',
+        best_score: 5,
         description: "Современный подход к асинхронности"
       },
       {

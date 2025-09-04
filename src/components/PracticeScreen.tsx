@@ -68,7 +68,7 @@ export const PracticeScreen: React.FC<PracticeScreenProps> = ({
             <div className="flex justify-between text-xs text-gray-500">
               <span>Начальный</span>
               <span>Продвинутый</span>
-              <span>Эксперт</span>
+              <span>Мастер</span>
             </div>
           </div>
         </div>

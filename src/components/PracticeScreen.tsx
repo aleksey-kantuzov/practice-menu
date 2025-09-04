@@ -60,9 +60,13 @@ export const PracticeScreen: React.FC<PracticeScreenProps> = ({
                 className="bg-blue-500 h-2 rounded-full transition-all duration-300" 
                 style={{ width: `${6 > 0 ? (tasksInCredit / 6) * 100 : 0}%` }} 
               />
+              {/* Метки на прогресс баре */}
+              <div className="absolute top-0 left-0 w-2 h-2 bg-gray-400 rounded-full transform -translate-y-0"></div>
+              <div className="absolute top-0 left-1/2 w-2 h-2 bg-gray-400 rounded-full transform -translate-x-1/2 -translate-y-0"></div>
+              <div className="absolute top-0 right-0 w-2 h-2 bg-gray-400 rounded-full transform -translate-y-0"></div>
             </div>
             <div className="flex justify-between text-xs text-gray-500">
-              <span>0</span>
+              <span>Начальный</span>
               <span>Продвинутый</span>
               <span>Эксперт</span>
             </div>

@@ -68,19 +68,18 @@ const getStatusText = (status: Task['status']) => {
 };
 
 // Функция для определения доступности задачи
-const isTaskUnlocked = (taskId: number): boolean => {
-  // Получаем все задачи в порядке их следования
-  const allTasks = practiceBlocks.flatMap(block => block.tasks);
-  const currentTaskIndex = allTasks.findIndex(task => task.id === taskId);
-  
-  if (currentTaskIndex === 0) {
-    // Первая задача всегда доступна
+const isTaskAvailable = (task: Task): boolean => {
+  // Если задача завершена или в процессе, она доступна
+  if (task.status === 'completed' || task.status === 'in_progress') {
     return true;
   }
   
-  // Проверяем, завершена ли предыдущая задача
-  const previousTask = allTasks[currentTaskIndex - 1];
-  return previousTask.status === 'completed';
+  // Проверяем, есть ли другие задачи в работе
+  const allTasks = practiceBlocks.flatMap(block => block.tasks);
+  const hasTaskInProgress = allTasks.some(t => t.status === 'in_progress');
+  
+  // Если есть задача в работе, новые задачи недоступны
+  return !hasTaskInProgress;
 };
 
 export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
@@ -129,26 +128,24 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
       >
         <div className="px-4 pb-4 space-y-3">
           {block.tasks.map((task) => {
-            const isUnlocked = isTaskUnlocked(task.id);
-            const isClickable = isUnlocked && task.status !== 'not_started';
+            const isAvailable = isTaskAvailable(task);
+            const isClickable = isAvailable;
             
             return (
               <button
                 key={task.id}
                 onClick={() => isClickable && onTaskClick(task)}
-                disabled={!isUnlocked}
+                disabled={!isAvailable}
                 className={`w-full p-4 rounded-xl border text-left transition-all duration-200 ${
-                  !isUnlocked
+                  !isAvailable
                     ? 'border-gray-200 bg-gray-100 opacity-60 cursor-not-allowed'
-                    : isClickable
-                    ? 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 hover:shadow-md'
-                    : 'border-gray-200 bg-gray-50'
+                    : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50 hover:shadow-md'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <h4 className={`font-medium mb-3 ${
-                      !isUnlocked ? 'text-gray-400' : 'text-gray-900'
+                      !isAvailable ? 'text-gray-400' : 'text-gray-900'
                     }`}>
                       {task.title}
                     </h4>
@@ -156,7 +153,7 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          !isUnlocked 
+                          !isAvailable 
                             ? 'text-gray-400 bg-gray-200'
                             : getDifficultyColor(task.difficulty)
                         }`}>
@@ -164,16 +161,16 @@ export const PracticeAccordion: React.FC<PracticeAccordionProps> = ({
                         </span>
                         
                         <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          !isUnlocked
+                          !isAvailable
                             ? 'text-gray-400 bg-gray-200'
                             : getStatusColor(task.status)
                         }`}>
-                          {!isUnlocked ? 'Не начат' : getStatusText(task.status)}
+                          {!isAvailable ? 'Недоступно' : getStatusText(task.status)}
                         </span>
                       </div>
                       
                       <div className={`text-center flex flex-col items-center justify-center ${
-                        !isUnlocked ? 'text-gray-400' : 'text-gray-900'
+                        !isAvailable ? 'text-gray-400' : 'text-gray-900'
                       }`}>
                         <div className="text-sm font-bold">
                           {task.best_score !== null ? `${task.best_score}/10` : '—/10'}
